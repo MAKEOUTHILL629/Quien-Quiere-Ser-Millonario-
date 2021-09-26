@@ -62,4 +62,6 @@ public class Pregunta {
     public List<Respuesta> getRespuestas() {
         return respuestas;
     }
+
+
 }

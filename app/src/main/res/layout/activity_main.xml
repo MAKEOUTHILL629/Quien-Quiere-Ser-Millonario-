@@ -9,23 +9,25 @@
     <TextView
             android:layout_width="132dp"
             android:layout_height="48dp" android:id="@+id/textViewRespuestaD"
-            tools:ignore="MissingConstraints" android:layout_marginEnd="50dp"
+            tools:ignore="MissingConstraints" android:layout_marginEnd="56dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="199dp"/>
+            android:layout_marginBottom="168dp"
+    />
     <TextView
             android:layout_width="132dp"
             android:layout_height="48dp" android:id="@+id/textViewRespuestaC"
             tools:ignore="MissingConstraints"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="199dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="50dp"/>
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="168dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="48dp"/>
     <TextView
             android:layout_width="260dp"
             android:layout_height="51dp" android:id="@+id/textViewPregunta"
             tools:ignore="MissingConstraints" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="75dp"
-            app:layout_constraintTop_toBottomOf="@+id/textViewContexto" android:layout_marginEnd="76dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="51dp"
-            app:layout_constraintBottom_toTopOf="@+id/textViewRespuestaA"/>
+            android:layout_marginEnd="76dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginBottom="80dp" app:layout_constraintBottom_toTopOf="@+id/textViewRespuestaA"/>
     <TextView
             android:layout_width="132dp"
             android:layout_height="48dp" android:id="@+id/textViewRespuestaA"
@@ -35,12 +37,11 @@
     <TextView
             android:layout_width="132dp"
             android:layout_height="48dp" android:id="@+id/textViewRespuestaB"
-            tools:ignore="MissingConstraints" android:layout_marginStart="47dp"
-            app:layout_constraintStart_toEndOf="@+id/textViewRespuestaA"
-            app:layout_constraintTop_toBottomOf="@+id/textViewPregunta" android:layout_marginEnd="50dp"
+            tools:ignore="MissingConstraints"
+            android:layout_marginEnd="56dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/textViewRespuestaD" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.429"/>
+            app:layout_constraintBottom_toTopOf="@+id/textViewRespuestaD"
+            android:layout_marginBottom="68dp"/>
     <TextView
             android:text="Puntuacion : 0"
             android:layout_width="wrap_content"
@@ -68,4 +69,31 @@
             android:layout_marginStart="34dp"
             app:layout_constraintTop_toBottomOf="@+id/textViewNivel" android:layout_marginEnd="41dp"
             app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+            android:text="Comenzar de nuevo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/buttonReset"
+            android:layout_marginEnd="116dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="29dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="116dp"/>
+    <TextView
+            android:text="Publico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textViewPublico"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="87dp"
+            android:layout_marginBottom="28dp" app:layout_constraintBottom_toTopOf="@+id/textViewRespuestaA"/>
+    <TextView
+            android:text="Llamada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textViewLlamada"
+            android:layout_marginTop="33dp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPregunta"
+            app:layout_constraintEnd_toStartOf="@+id/textViewCincuenta" android:layout_marginEnd="41dp"
+            android:layout_marginStart="43dp" app:layout_constraintStart_toEndOf="@+id/textViewPublico"/>
+    <TextView
+            android:text="50/50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textViewCincuenta"
+            android:layout_marginEnd="101dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="26dp" app:layout_constraintBottom_toTopOf="@+id/textViewRespuestaB"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

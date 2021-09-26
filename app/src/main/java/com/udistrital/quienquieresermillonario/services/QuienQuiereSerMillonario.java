@@ -17,6 +17,12 @@ public class QuienQuiereSerMillonario {
     private boolean juegoTerminado;
 
     private List<Pregunta> preguntas;
+    private double premio = 10000;
+
+    boolean publico;
+    boolean cincuenta;
+    boolean llamada;
+
 
 
     public QuienQuiereSerMillonario() {
@@ -25,10 +31,13 @@ public class QuienQuiereSerMillonario {
         RespuestaDataBuilder builder = new RespuestaDataBuilder();
         this.preguntas = builder.getPreguntaList();
         this.juegoTerminado = false;
+        this.publico =false;
+        this.cincuenta = false;
+        this.llamada = false;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public Pregunta obtenerPreguntaAleatoria() {
+    public Pregunta obtenerPreguntaAleatoria() throws Exception {
         int cantidadNoSolucionadas = (int) this.preguntas.stream().filter(pregunta -> !pregunta.getEstaSolucionada()).count();
         Random random = new Random();
         int index = random.nextInt(cantidadNoSolucionadas);
@@ -42,7 +51,10 @@ public class QuienQuiereSerMillonario {
 
         if (resultado) {
             puntuacion++;
+            if (puntuacion % 5 == 0 && puntuacion > 4 ) {
 
+                nivel++;
+            }
         } else {
             juegoTerminado = true;
         }
@@ -61,15 +73,26 @@ public class QuienQuiereSerMillonario {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public int getNivel() {
-        if (this.cantidadRespondidad() % 5 == 0) {
 
-            nivel++;
-            return nivel - 1;
-        }
         return nivel;
     }
 
     public boolean isJuegoTerminado() {
         return juegoTerminado;
+    }
+
+    public double getPremio(){
+        return this.premio * puntuacion;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public String ayudaPublico(Pregunta pregunta){
+       if(!this.publico){
+           this.publico = true;
+           return pregunta.getRespuestas().stream().filter(res -> res.getEsCorrecta()).findAny().get().getRespuesta();
+       }else{
+            return "Ya no tiene disponible esta ayuda";
+       }
+
     }
 }

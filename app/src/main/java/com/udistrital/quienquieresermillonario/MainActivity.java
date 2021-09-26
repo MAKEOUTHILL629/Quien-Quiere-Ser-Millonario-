@@ -1,5 +1,7 @@
 package com.udistrital.quienquieresermillonario;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.widget.Button;
@@ -25,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView nivel;
     private TextView contexto;
     private Button button;
+    private Dialog dialog;
+    private String info;
+    private TextView infoTextView;
+    private Button buttonReset;
+    private Pregunta pregunta = null;
+    private TextView publico;
 
     private QuienQuiereSerMillonario juego;
 
@@ -44,11 +52,20 @@ public class MainActivity extends AppCompatActivity {
         this.puntuacion = findViewById(R.id.textViewPuntuacion);
         this.nivel = findViewById(R.id.textViewNivel);
         this.contexto = findViewById(R.id.textViewContexto);
+        this.publico = findViewById(R.id.textViewPublico);
+        info = "Iniciar juego";
         menu();
         establecerPregunta();
 
+        this.buttonReset = findViewById(R.id.buttonReset);
+
+        this.buttonReset.setOnClickListener(e -> {
+            this.info = "Juego reiniciado";
+            menu();
+        });
 
     }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void establecerPregunta() {
 
@@ -58,83 +75,115 @@ public class MainActivity extends AppCompatActivity {
         this.respuestaD.setBackgroundColor(Color.WHITE);
 
 
-        Pregunta pregunta = this.juego.obtenerPreguntaAleatoria();
 
-        this.enunciadoPregunta.setText(pregunta.getEnunciado());
-        List<Respuesta> listaRespuesta = pregunta.obtenerRespuestasAleatoriamente();
-        this.respuestaA.setText(listaRespuesta.get(0).getRespuesta());
-        this.respuestaB.setText(listaRespuesta.get(1).getRespuesta());
-        this.respuestaC.setText(listaRespuesta.get(2).getRespuesta());
-        this.respuestaD.setText(listaRespuesta.get(3).getRespuesta());
-        this.puntuacion.setText("Puntuacion : " + this.juego.getPuntuacion());
-        this.nivel.setText("Nivel: " + this.juego.getNivel());
+        try {
+            pregunta = this.juego.obtenerPreguntaAleatoria();
 
-
-        this.respuestaA.setOnClickListener(e -> {
-            if (this.juego.verificarCorrecta(pregunta, listaRespuesta.get(0))) {
-                this.respuestaA.setBackgroundColor(Color.GREEN);
-
-                establecerPregunta();
+            this.contexto.setText("Responde esta pregunta, y te asegura el premio de  " + this.juego.getPremio());
+            this.enunciadoPregunta.setText(pregunta.getEnunciado());
+            List<Respuesta> listaRespuesta = pregunta.obtenerRespuestasAleatoriamente();
+            this.respuestaA.setText("a. " + listaRespuesta.get(0).getRespuesta());
+            this.respuestaB.setText("b. " + listaRespuesta.get(1).getRespuesta());
+            this.respuestaC.setText("c. " + listaRespuesta.get(2).getRespuesta());
+            this.respuestaD.setText("d. " + listaRespuesta.get(3).getRespuesta());
+            this.puntuacion.setText("Puntuacion : " + this.juego.getPuntuacion());
+            this.nivel.setText("Nivel: " + this.juego.getNivel());
 
 
-            } else {
-                this.respuestaA.setBackgroundColor(Color.RED);
+            Context context = getApplicationContext();
+            CharSequence text = "Respuesta correcta";
+            int duration = Toast.LENGTH_SHORT;
 
-            }
-        });
-
-
-        this.respuestaB.setOnClickListener(e -> {
-            if (this.juego.verificarCorrecta(pregunta, listaRespuesta.get(1))) {
-                this.respuestaB.setBackgroundColor(Color.GREEN);
-                establecerPregunta();
-
-            } else {
-                this.respuestaB.setBackgroundColor(Color.RED);
-                this.respuestaA.setBackgroundColor(Color.WHITE);
-            }
-        });
-
-        this.respuestaC.setOnClickListener(e -> {
-            if (this.juego.verificarCorrecta(pregunta, listaRespuesta.get(2))) {
-                this.respuestaC.setBackgroundColor(Color.GREEN);
-
-                establecerPregunta();
+            Toast toast = Toast.makeText(context, text, duration);
 
 
-            } else {
-                this.respuestaC.setBackgroundColor(Color.RED);
+            this.respuestaA.setOnClickListener(e -> {
+                if (this.juego.verificarCorrecta(pregunta, listaRespuesta.get(0))) {
+                    this.respuestaA.setBackgroundColor(Color.GREEN);
 
-            }
-        });
+                    establecerPregunta();
+                    toast.show();
 
-        this.respuestaD.setOnClickListener(e -> {
-            if (this.juego.verificarCorrecta(pregunta, listaRespuesta.get(3))) {
-                this.respuestaD.setBackgroundColor(Color.GREEN);
+                } else {
+                    this.info = "Juego terminado";
+                    this.menu();
+                    this.respuestaA.setBackgroundColor(Color.RED);
+                    establecerPregunta();
+                }
+            });
 
-                establecerPregunta();
 
+            this.respuestaB.setOnClickListener(e -> {
+                if (this.juego.verificarCorrecta(pregunta, listaRespuesta.get(1))) {
+                    this.respuestaB.setBackgroundColor(Color.GREEN);
+                    establecerPregunta();
+                    toast.show();
+                } else {
+                    this.info = "Juego terminado";
+                    this.menu();
+                    this.respuestaB.setBackgroundColor(Color.RED);
+                    establecerPregunta();
+                }
+            });
 
-            } else {
-                this.respuestaD.setBackgroundColor(Color.RED);
+            this.respuestaC.setOnClickListener(e -> {
+                if (this.juego.verificarCorrecta(pregunta, listaRespuesta.get(2))) {
+                    this.respuestaC.setBackgroundColor(Color.GREEN);
 
-            }
-        });
+                    establecerPregunta();
+                    toast.show();
+
+                } else {
+                    this.info = "Juego terminado";
+                    this.menu();
+                    this.respuestaC.setBackgroundColor(Color.RED);
+                    establecerPregunta();
+                }
+            });
+
+            this.respuestaD.setOnClickListener(e -> {
+                if (this.juego.verificarCorrecta(pregunta, listaRespuesta.get(3))) {
+                    this.respuestaD.setBackgroundColor(Color.GREEN);
+
+                    establecerPregunta();
+
+                    toast.show();
+                } else {
+                    this.info = "Juego terminado";
+                    this.menu();
+                    this.respuestaD.setBackgroundColor(Color.RED);
+                    establecerPregunta();
+                }
+            });
+
+            this.publico.setOnClickListener(e -> {
+               toast.setText(this.juego.ayudaPublico(pregunta));
+               toast.show();
+               toast.setText("Respuesta correcta");
+            });
+        } catch (Exception e) {
+            this.info = "Juego terminado, su premio es de " + this.juego.getPremio();
+            menu();
+        }
+
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void menu(){
-        setContentView(R.layout.view_play);
-        button = findViewById(R.id.buttonPlay);
+    public void menu() {
+        this.dialog = new Dialog(this);
+        this.dialog.setContentView(R.layout.view_play);
+        this.infoTextView = dialog.findViewById(R.id.textViewInfo);
+        infoTextView.setText(info);
+        button = this.dialog.findViewById(R.id.buttonPlay);
         button.setOnClickListener((e) -> {
             this.juego = new QuienQuiereSerMillonario();
-            setContentView(R.layout.activity_main);
+            establecerPregunta();
+            dialog.dismiss();
 
         });
-        establecerPregunta();
+        dialog.show();
     }
-
 
 
 }

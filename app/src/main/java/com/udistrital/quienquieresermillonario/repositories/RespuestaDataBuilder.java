@@ -83,6 +83,39 @@ public class RespuestaDataBuilder {
         this.preguntaList.add(pregunta10);
 
 
+        Pregunta pregunta11 = new Pregunta("¿En qué país se encuentra la torre de Pisa?", "Italia");
+        pregunta11.agregarRespuestaIncorrecta("Francia");
+        pregunta11.agregarRespuestaIncorrecta("Londres");
+        pregunta11.agregarRespuestaIncorrecta("Reino Unido");
+        this.preguntaList.add(pregunta11);
+
+        Pregunta pregunta12 = new Pregunta("¿Cuál es el océano más grande?", "Pacífico");
+        pregunta12.agregarRespuestaIncorrecta("Atlántico");
+        pregunta12.agregarRespuestaIncorrecta("Índico");
+        pregunta12.agregarRespuestaIncorrecta("Glacial Antártico");
+        this.preguntaList.add(pregunta12);
+
+
+        Pregunta pregunta13 = new Pregunta(" ¿Qué año llegó Cristóbal Colón a América?", "1492");
+        pregunta13.agregarRespuestaIncorrecta("1965");
+        pregunta13.agregarRespuestaIncorrecta("1698");
+        pregunta13.agregarRespuestaIncorrecta("1255");
+        this.preguntaList.add(pregunta13);
+
+
+        Pregunta pregunta14 = new Pregunta("¿Dónde se encuentra la famosa Torre Eiffel?", "Paris");
+        pregunta14.agregarRespuestaIncorrecta("Turín");
+        pregunta14.agregarRespuestaIncorrecta("Tokio");
+        pregunta14.agregarRespuestaIncorrecta("Vilna");
+        this.preguntaList.add(pregunta14);
+
+
+        Pregunta pregunta15 = new Pregunta("¿Cuál es tercer planeta en el sistema solar?", "Tierra");
+        pregunta15.agregarRespuestaIncorrecta("Marte");
+        pregunta15.agregarRespuestaIncorrecta("Jupiter");
+        pregunta15.agregarRespuestaIncorrecta("Saturno");
+        this.preguntaList.add(pregunta15);
+
 
     }
 
